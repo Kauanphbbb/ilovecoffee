@@ -17,13 +17,13 @@ export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
   @Get()
-  findAll(): Coffee[] {
-    return this.coffeesService.findAll();
+  async findAll(): Promise<Coffee[]> {
+    return await this.coffeesService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Coffee {
-    return this.coffeesService.findOne(id);
+  async findOne(@Param('id') id: string): Promise<Coffee> {
+    return await this.coffeesService.findOne(id);
   }
 
   @Post()
@@ -32,12 +32,15 @@ export class CoffeesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
-    return this.coffeesService.update(id, updateCoffeeDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateCoffeeDto: UpdateCoffeeDto,
+  ) {
+    return await this.coffeesService.update(id, updateCoffeeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.coffeesService.remove(id);
+  async remove(@Param('id') id: string) {
+    return await this.coffeesService.remove(id);
   }
 }
